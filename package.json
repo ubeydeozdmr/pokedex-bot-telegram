@@ -1,0 +1,17 @@
+{
+  "name": "pokedexbot",
+  "version": "1.0.0",
+  "description": "It is used to see the picture and features of the pokemon whose ID or name you entered.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Ubeyde Emir Ozdemir",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "dotenv": "^10.0.0",
+    "telegraf": "^3.39.0"
+  }
+}
