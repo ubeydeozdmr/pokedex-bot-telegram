@@ -1,6 +1,6 @@
 # PokédexBot
 ## What is this?
-It is a Telegram Bot written with JavaScript. In addition, [telegraf.js v3](https://telegraf.js.org) and [axios](https://www.npmjs.com/package/axios), which are [node.js](https://nodejs.org/en/) modules were used.
+It is a Telegram Bot written with JavaScript and built using [PokeAPI](https://pokeapi.co/) (The RESTful Pokemon API). In addition, [telegraf.js v3](https://telegraf.js.org) and [axios](https://www.npmjs.com/package/axios), which are [node.js](https://nodejs.org/en/) modules were used.
 ## What does it to?
 Pokédex Bot for Telegram can show you the list of all pokémon and give you the picture and description of that pokémon in return for you to enter the ID or name of the pokémon you requested.
 ## Usage
