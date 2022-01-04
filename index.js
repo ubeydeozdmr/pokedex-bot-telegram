@@ -92,6 +92,9 @@ bot.command('pk', ctx => {
       );
     }
   };
+  
+  // ! BUG: When node.js is run from the console (when in testing), the bot works fine,
+  // ! but when deployed using the AWS Lambda function, the getDescription() function does not work.
 
   const getDescription = function (ctx, descId) {
     try {
