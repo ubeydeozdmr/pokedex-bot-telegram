@@ -9,14 +9,14 @@ const usage = `You can search Pokédex Bot by both ID and name. To do this, type
 
 *Usage:*
 /pk \`<id/name>\` - Photo and stats of any pokémon
-/pk \`<id/name> desc\` - Photo, stats and description of any pokémon
+/pk \`random\` - Photo and stats of random pokémon
 /pklist \`<gen>\` - Shows the list of all pokémon from any generation.
 
 *Examples:*
 /pk 1 - Bulbasaur's photo and stats
 /pk bulbasaur - Bulbasaur's photo and stats
-/pk sandslash desc - Sandslash's photo, stats and description
-/pk 139 desc - Omastar's photo, stats and descriptions
+/pk sandslash - Sandslash's photo and stats
+/pk 139 - Omastar's photo and stats
 /pklist 2 - Shows pokémon from the second generation.
 /pklist 8 - Shows pokémon from the eighth generation.`;
 
@@ -50,13 +50,6 @@ const emojiStats = {
   speed: '👟',
 };
 
-const getPictureId = function (num) {
-  // ? Converts the incoming number via the "num" parameter to a 3-character string.
-  if (num < 10) num = '00' + num;
-  else if (num < 100) num = '0' + num;
-  return num;
-};
-
 bot.start(ctx => ctx.replyWithMarkdown(welcome));
 
 bot.help(ctx => ctx.replyWithMarkdown(usage));
@@ -64,75 +57,15 @@ bot.help(ctx => ctx.replyWithMarkdown(usage));
 bot.command('pk', ctx => {
   let input = ctx.message.text.toLowerCase();
   let inputArray = input.split(' ');
-  let getNumber = Number(inputArray[1]);
-  let pokemonName;
   let pokemonId;
-  let pokemonDesc = '';
+  let pokemonName;
   let pokemonTypes = '';
   let pokemonAbilities = '';
   let pokemonStats = '';
 
-  const getPicture = function (ctx, picId) {
+  const getAction = function () {
     try {
-      ctx.replyWithPhoto(
-        `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${getPictureId(
-          picId
-        )}.png`
-      );
-    } catch (e) {
-      console.log('getPicture()', e);
-      bot.telegram.sendMessage(
-        process.env.GROUP_ID,
-        'ERROR: getPicture()\n\n' +
-          e +
-          '\n\n' +
-          ctx.from.username +
-          ' said: ' +
-          ctx.message.text
-      );
-    }
-  };
-  
-  // ! BUG: When node.js is run from the console (when in testing), the bot works fine,
-  // ! but when deployed using the AWS Lambda function, the getDescription() function does not work.
-
-  const getDescription = function (ctx, descId) {
-    try {
-      axios
-        .get('https://pokeapi.co/api/v2/pokemon-species/' + descId)
-        .then(res => {
-          for (let i = 0; i < res.data.flavor_text_entries.length; i++) {
-            if (res.data.flavor_text_entries[i].language.name == 'en')
-              pokemonDesc +=
-                res.data.flavor_text_entries[i].version.name
-                  .charAt(0)
-                  .toUpperCase() +
-                res.data.flavor_text_entries[i].version.name
-                  .slice(1)
-                  .replaceAll('-', ' ') +
-                ':\n' +
-                res.data.flavor_text_entries[i].flavor_text +
-                '\n\n';
-          }
-          ctx.reply(pokemonDesc);
-        });
-    } catch (e) {
-      console.log('getDescription()', e);
-      bot.telegram.sendMessage(
-        process.env.GROUP_ID,
-        'ERROR: getDescription()\n\n' +
-          e +
-          '\n\n' +
-          ctx.from.username +
-          ' said: ' +
-          ctx.message.text
-      );
-    }
-  };
-
-  const getTypes = function (ctx, pkId) {
-    try {
-      axios.get('https://pokeapi.co/api/v2/pokemon/' + pkId).then(res => {
+      axios.get('https://pokeapi.co/api/v2/pokemon/' + pokemonId).then(res => {
         pokemonName =
           res.data.name.charAt(0).toUpperCase() + res.data.name.slice(1);
         for (let i = 0; i < res.data.types.length; i++) {
@@ -150,123 +83,107 @@ bot.command('pk', ctx => {
             '\n';
         }
         for (let i = 0; i < res.data.stats.length; i++) {
+          if (emojiStats[res.data.stats[i].stat.name] != undefined)
+            pokemonStats += emojiStats[res.data.stats[i].stat.name] + ' ';
+
           pokemonStats +=
-            emojiStats[res.data.stats[i].stat.name] == undefined
-              ? res.data.stats[i].stat.name.charAt(0).toUpperCase() +
-                res.data.stats[i].stat.name.slice(1).replace('-', ' ') +
-                ': ' +
-                res.data.stats[i].base_stat +
-                '\n'
-              : emojiStats[res.data.stats[i].stat.name] +
-                ' ' +
-                res.data.stats[i].stat.name.charAt(0).toUpperCase() +
-                res.data.stats[i].stat.name.slice(1).replace('-', ' ') +
-                ': ' +
-                res.data.stats[i].base_stat +
-                '\n';
+            res.data.stats[i].stat.name.charAt(0).toUpperCase() +
+            res.data.stats[i].stat.name.slice(1).replace('-', ' ') +
+            ': ' +
+            res.data.stats[i].base_stat +
+            '\n';
         }
-        ctx.replyWithMarkdown(
-          '*' +
-            pokemonName +
-            '* #' +
-            pokemonId +
-            '\n\n*Types:*\n' +
-            pokemonTypes +
-            '\n*Abilities:*\n' +
-            pokemonAbilities +
-            '\nWeight: ' +
-            res.data.weight / 10 +
-            ' kg' +
-            '\nHeight: ' +
-            res.data.height / 10 +
-            ' m' +
-            '\n\n*Stats:*\n' +
-            pokemonStats
+
+        bot.telegram.sendPhoto(
+          ctx.update.message.chat.id,
+          `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${
+            pokemonId < 10
+              ? '00' + pokemonId
+              : pokemonId < 100
+              ? '0' + pokemonId
+              : pokemonId
+          }.png`,
+          {
+            parse_mode: 'markdown',
+            caption:
+              '*' +
+              pokemonName +
+              '* #' +
+              pokemonId +
+              '\n\n*Types:*\n' +
+              pokemonTypes +
+              '\n*Abilities:*\n' +
+              pokemonAbilities +
+              '\nWeight: ' +
+              res.data.weight / 10 +
+              ' kg' +
+              '\nHeight: ' +
+              res.data.height / 10 +
+              ' m' +
+              '\n\n*Stats:*\n' +
+              pokemonStats,
+          }
         );
       });
     } catch (e) {
-      console.log('GetTypes()', e);
-      bot.telegram.sendMessage(
-        process.env.GROUP_ID,
-        'ERROR: getTypes()\n\n' +
-          e +
-          '\n\n' +
-          ctx.from.username +
-          ' said: ' +
-          ctx.message.text
-      );
+      errorHandler('getAction()', e);
     }
   };
 
-  if (inputArray.length == 1) {
-    // ? This block of code is returned if only the /pk command is entered.
-    ctx.reply(usage.substring(150, 200));
-  } else if (getNumber >= 1 && getNumber <= 898) {
-    // ? This code block is returned if a number between 0-898 is entered.
-    inputArray.shift();
-    inputArray.join(' ');
-    getNumber = Number(inputArray[0]);
-    pokemonId = getNumber;
-    getPicture(ctx, getNumber);
-    getTypes(ctx, getNumber);
-    if (inputArray[1] == 'desc') getDescription(ctx, getNumber);
-  } else {
-    // ? If a string is to be returned, this block of code works.
-    inputArray.shift();
-    inputArray.join(' ');
-    try {
-      axios
-        .get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=898')
-        .then(res => {
-          let totalPokemonNumber = res.data.results.length;
-          let found = false;
-          for (let i = 0; i < totalPokemonNumber; i++) {
-            // ? Pokemon names are scanned to prevent errors.
-            if (inputArray[0] == res.data.results[i].name) {
-              // ? If the input matches a name in the list, the code is continued.
-              found = true;
-              axios
-                .get('https://pokeapi.co/api/v2/pokemon/' + inputArray[0])
-                .then(res => {
-                  try {
-                    pokemonId = res.data.id;
-                    pokemonName = res.data.name;
-                    getPicture(ctx, pokemonId);
-                    getTypes(ctx, pokemonName);
-                    if (inputArray[1] == 'desc') getDescription(ctx, pokemonId);
-                  } catch (e) {
-                    console.log('Obtaining ID and name information', e);
-                    bot.telegram.sendMessage(
-                      process.env.GROUP_ID,
-                      'ERROR: Obtaining ID and name information\n\n' +
-                        e +
-                        '\n\n' +
-                        ctx.from.username +
-                        ' said: ' +
-                        ctx.message.text
-                    );
-                  }
-                });
-            }
-          }
-          if (!found) {
-            ctx.replyWithMarkdown(
-              'There is no pokémon with this ID or name. ' + usage
-            );
-          }
-        });
-    } catch (e) {
-      console.log('Scanning the Pokémon list', e);
-      bot.telegram.sendMessage(
-        process.env.GROUP_ID,
-        'ERROR: Scanning the Pokémon list\n\n' +
-          e +
-          '\n\n' +
-          ctx.from.username +
-          ' said: ' +
-          ctx.message.text
-      );
+  const errorHandler = function (type, e) {
+    console.log(type, e);
+    bot.telegram.sendMessage(
+      process.env.GROUP_ID,
+      'ERROR: ' +
+        type +
+        '\n\n' +
+        e +
+        '\n\n' +
+        ctx.from.username +
+        ' said: ' +
+        ctx.message.text
+    );
+  };
+
+  try {
+    if (inputArray.length == 1) {
+      ctx.reply(usage.substring(150, 200));
+    } else if (inputArray.length > 1) {
+      inputArray.shift();
+      inputArray.join(' ');
+      let getNumber = Number(inputArray[0]);
+      if (getNumber >= 1 && getNumber <= 898) {
+        pokemonId = getNumber;
+        getAction();
+      } else if (inputArray[0] == 'random') {
+        pokemonId = Math.trunc(Math.random() * 898) + 1;
+        getAction();
+      } else {
+        try {
+          axios
+            .get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=898')
+            .then(res => {
+              let found = false;
+              for (let i = 0; i < res.data.results.length; i++) {
+                if (inputArray[0] == res.data.results[i].name) {
+                  found = true;
+                  pokemonId = i + 1;
+                  getAction();
+                  break;
+                }
+              }
+              if (!found)
+                ctx.replyWithMarkdown(
+                  '*There is no pokémon with this ID or name.* ' + usage
+                );
+            });
+        } catch (e) {
+          errorHandler('Check if pokemon name is valid', e);
+        }
+      }
     }
+  } catch (e) {
+    errorHandler('Detect inputArray.length', e);
   }
 });
 
