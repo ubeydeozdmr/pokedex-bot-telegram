@@ -6,6 +6,7 @@ Pokédex Bot for Telegram can show you the list of all pokémon and give you the
 ## Changelog
 ### v1.1
  - The code has been simplified
+ - Pokemon attribute information has been transformed a photo caption.
  - The getDescription feature was removed after the project was deployed due to the problems and not being useful.
  - Added random pokemon feature.
  - The quality of displayed photos has been improved.
