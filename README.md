@@ -26,7 +26,7 @@ If you have a Telegram account, you can start trying the bot by [clicking here.]
 ### Examples
     /pk 1 - Bulbasaur's photo and stats
     /pk bulbasaur - Bulbasaur's photo and stats
-    /pk sandslash desc - Sandslash's photo, stats and description
-    /pk 139 desc - Omastar's photo, stats and descriptions
+    /pk sandslash - Sandslash's photo and stats
+    /pk 139 - Omastar's photo and stats
     /pklist 2 - Shows pokémon from the second generation.
     /pklist 8 - Shows pokémon from the eighth generation.
