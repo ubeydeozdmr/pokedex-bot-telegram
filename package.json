@@ -1,0 +1,31 @@
+{
+  "name": "pokedex-bot-telegram",
+  "version": "1.0.0",
+  "description": "Pokédex Bot for Telegram can show you the list of all pokémon and give you the picture and description of that pokémon in return for you to enter the ID or name of the pokémon you requested.",
+  "main": "index.js",
+  "engines": {
+    "node": "16.14",
+    "npm": "8.5"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubeydeozdmr/pokedex-bot-telegram"
+  },
+  "keywords": [
+    "pokedex"
+  ],
+  "author": "Ubeyde Emir Özdemir",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "node-fetch": "^2.6.7",
+    "telegraf": "^3.39.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
