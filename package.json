@@ -12,9 +12,6 @@
     "build": "node index.js",
     "dev": "nodemon index.js"
   },
-  "engines": {
-    "node": ">=10.0.0"
-  }
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ubeydeozdmr/pokedex-bot-telegram"
