@@ -6,7 +6,7 @@ Note: The old version of the project has been migrated to the legacy branch. [Cl
 
 - Telegraf.js has been upgraded from version 3.39.0 to version 4.7.0.
 
-[See full changelog](https://github.com/ubeydeozdmr/pokedex-bot-telegram/changelog.md)
+[See full changelog](https://github.com/ubeydeozdmr/pokedex-bot-telegram/blob/main/changelog.md)
 
 ## What is it & what does it do?
 
