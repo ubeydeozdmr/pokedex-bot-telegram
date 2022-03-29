@@ -2,9 +2,12 @@
 
 Note: The old version of the project has been migrated to the legacy branch. [Click here](https://github.com/ubeydeozdmr/pokedex-bot-telegram/tree/legacy) to view.
 
-## What's new in version 1.0.1
+## What's new in version 1.1
 
-- Telegraf.js has been upgraded from version 3.39.0 to version 4.7.0.
+- Some folder & file names changed.
+- Inline buttons has been added.
+- Types callback has been added.
+- New folder location is specified.
 
 [See full changelog](https://github.com/ubeydeozdmr/pokedex-bot-telegram/blob/main/changelog.md)
 
