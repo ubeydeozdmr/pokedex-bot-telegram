@@ -1,5 +1,5 @@
-const getPokemonTypeModel = require('../../models/getPokemonTypeModel');
-const getPokemonTypeView = require('../../views/getPokemonTypeView');
+const getPokemonTypeModel = require('../../models/pokemonTypeModel');
+const getPokemonTypeView = require('../../views/pokemonTypeView');
 
 const pokemonTypeCallback = async (ctx, _types) => {
   const typesArr = new Array();

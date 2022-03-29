@@ -1,6 +1,6 @@
 const config = require('../../config');
-const getPokemonListModel = require('../../models/getPokemonListModel');
-const getPokemonListView = require('../../views/getPokemonListView');
+const getPokemonListModel = require('../../models/pokemonListModel');
+const getPokemonListView = require('../../views/pokemonListView');
 
 module.exports = bot => {
   bot.command('pklist', async ctx => {
