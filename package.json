@@ -1,6 +1,6 @@
 {
   "name": "pokedex-bot-telegram",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pokédex Bot for Telegram can show you the list of all pokémon and give you the picture and description of that pokémon in return for you to enter the ID or name of the pokémon you requested.",
   "main": "index.js",
   "engines": {
