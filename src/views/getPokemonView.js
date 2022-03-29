@@ -1,15 +1,16 @@
+const pokemonTypeCallback = require('../controllers/callbacks/pokemonTypeCallback');
 const emoji = require('../emoji');
 
 const getPokemonView = (
   bot,
   ctx,
   _abilities,
-  _height,
-  _id,
+  height,
+  id,
   _name,
   _stats,
   _types,
-  _weight
+  weight
 ) => {
   let types = '';
   let abilities = '';
@@ -41,23 +42,47 @@ const getPokemonView = (
   bot.telegram.sendPhoto(
     ctx.update.message.chat.id,
     `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${
-      _id < 10 ? '00' + _id : _id < 100 ? '0' + _id : _id
+      id < 10 ? '00' + id : id < 100 ? '0' + id : id
     }.png`,
     {
       parse_mode: 'markdown',
-      caption: `*${name}* #${_id}
+      caption: `*${name}* #${id}
       
 *Types:*
 ${types}
 *Abilities:*
 ${abilities}
-Weight: ${_weight / 10} kg
-Height: ${_height / 10} m
+⚖️ Weight: ${weight / 10} kg
+📏 Height: ${height / 10} m
 
 *Stats:*
 ${stats}`,
+      reply_markup: {
+        inline_keyboard: [
+          [
+            {
+              text: 'Types',
+              callback_data: `t-${id}`,
+            },
+            {
+              text: 'Abilities',
+              callback_data: `a-${id}`,
+            },
+          ],
+        ],
+      },
     }
   );
+
+  bot.action(`t-${id}`, ctx => {
+    ctx.deleteMessage();
+    pokemonTypeCallback(ctx, _types);
+  });
+
+  bot.action(`a-${id}`, ctx => {
+    ctx.deleteMessage();
+    ctx.reply(':)');
+  });
 };
 
 module.exports = getPokemonView;
