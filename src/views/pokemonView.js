@@ -1,3 +1,4 @@
+const pokemonAbilityCallback = require('../controllers/callbacks/pokemonAbilityCallback');
 const pokemonTypeCallback = require('../controllers/callbacks/pokemonTypeCallback');
 const emoji = require('../emoji');
 
@@ -81,7 +82,7 @@ ${stats}`,
 
   bot.action(`a-${id}`, ctx => {
     ctx.deleteMessage();
-    ctx.reply(':)');
+    pokemonAbilityCallback(ctx, _abilities);
   });
 };
 
