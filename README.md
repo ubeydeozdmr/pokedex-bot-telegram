@@ -1,4 +1,6 @@
 # PokédexBot
+# NOTE
+**This is the old version of the project before it was rebuilt and will no longer be developed.** [Click here](https://github.com/ubeydeozdmr/pokedex-bot-telegram/tree/main) to see the current project.
 ## What is this?
 It is a Telegram Bot written with JavaScript and built using [PokeAPI](https://pokeapi.co/) (The RESTful Pokemon API).
 ## What does it to?
