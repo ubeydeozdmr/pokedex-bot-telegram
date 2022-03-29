@@ -10,36 +10,60 @@ const getPokemonTypeView = (ctx, _typeName, _damageRelations, _pokemonList) => {
   let noDamageTo = '';
   let pokemon = '';
 
-  _damageRelations.double_damage_from.forEach(
-    item =>
-      (doubleDamageFrom += `${Object.values(item)[0]}
-`)
-  );
-  _damageRelations.double_damage_to.forEach(
-    item =>
-      (doubleDamageTo += `${Object.values(item)[0]}
-`)
-  );
-  _damageRelations.half_damage_from.forEach(
-    item =>
-      (halfDamageFrom += `${Object.values(item)[0]}
-`)
-  );
-  _damageRelations.half_damage_to.forEach(
-    item =>
-      (halfDamageTo += `${Object.values(item)[0]}
-`)
-  );
-  _damageRelations.no_damage_from.forEach(
-    item =>
-      (noDamageFrom += `${Object.values(item)[0]}
-`)
-  );
-  _damageRelations.no_damage_to.forEach(
-    item =>
-      (noDamageTo += `${Object.values(item)[0]}
-`)
-  );
+  _damageRelations.double_damage_from.forEach(item => {
+    Object.entries(emojiTypes).forEach(emoji => {
+      if (item.name === emoji[0]) doubleDamageFrom += `${emoji[1]} `;
+    });
+    doubleDamageFrom += `${
+      Object.values(item)[0][0].toUpperCase() + Object.values(item)[0].slice(1)
+    }
+`;
+  });
+  _damageRelations.double_damage_to.forEach(item => {
+    Object.entries(emojiTypes).forEach(emoji => {
+      if (item.name === emoji[0]) doubleDamageTo += `${emoji[1]} `;
+    });
+    doubleDamageTo += `${
+      Object.values(item)[0][0].toUpperCase() + Object.values(item)[0].slice(1)
+    }
+`;
+  });
+  _damageRelations.half_damage_from.forEach(item => {
+    Object.entries(emojiTypes).forEach(emoji => {
+      if (item.name === emoji[0]) halfDamageFrom += `${emoji[1]} `;
+    });
+    halfDamageFrom += `${
+      Object.values(item)[0][0].toUpperCase() + Object.values(item)[0].slice(1)
+    }
+`;
+  });
+  _damageRelations.half_damage_to.forEach(item => {
+    Object.entries(emojiTypes).forEach(emoji => {
+      if (item.name === emoji[0]) halfDamageTo += `${emoji[1]} `;
+    });
+    halfDamageTo += `${
+      Object.values(item)[0][0].toUpperCase() + Object.values(item)[0].slice(1)
+    }
+`;
+  });
+  _damageRelations.no_damage_from.forEach(item => {
+    Object.entries(emojiTypes).forEach(emoji => {
+      if (item.name === emoji[0]) noDamageFrom += `${emoji[1]} `;
+    });
+    noDamageFrom += `${
+      Object.values(item)[0][0].toUpperCase() + Object.values(item)[0].slice(1)
+    }
+`;
+  });
+  _damageRelations.no_damage_to.forEach(item => {
+    Object.entries(emojiTypes).forEach(emoji => {
+      if (item.name === emoji[0]) noDamageTo += `${emoji[1]} `;
+    });
+    noDamageTo += `${
+      Object.values(item)[0][0].toUpperCase() + Object.values(item)[0].slice(1)
+    }
+`;
+  });
 
   _pokemonList.forEach(
     item =>
