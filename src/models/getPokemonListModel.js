@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-const getPokemonListData = async (offset, limit) => {
+const getPokemonListModel = async (offset, limit) => {
   if (offset === 800) limit -= 2;
   try {
     let res = await fetch(
@@ -13,4 +13,4 @@ const getPokemonListData = async (offset, limit) => {
   }
 };
 
-module.exports = getPokemonListData;
+module.exports = getPokemonListModel;

@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const config = require('../config');
 
-const getPokemonData = async (ctx, input) => {
+const getPokemonModel = async (ctx, input) => {
   if (input === 'random') input = Math.trunc(Math.random() * 898) + 1;
   try {
     let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${input}`);
@@ -26,4 +26,4 @@ const getPokemonData = async (ctx, input) => {
   }
 };
 
-module.exports = getPokemonData;
+module.exports = getPokemonModel;
