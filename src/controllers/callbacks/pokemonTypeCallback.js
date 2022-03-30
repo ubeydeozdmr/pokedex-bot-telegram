@@ -1,7 +1,7 @@
 const getPokemonTypeModel = require('../../models/pokemonTypeModel');
 const getPokemonTypeView = require('../../views/pokemonTypeView');
 
-const pokemonTypeCallback = async (ctx, _types) => {
+const pokemonTypeCallback = async (bot, ctx, _types) => {
   const typesArr = new Array();
   const types = { ..._types };
   Object.values(types).forEach(val => {
@@ -9,7 +9,7 @@ const pokemonTypeCallback = async (ctx, _types) => {
   });
   typesArr.forEach(async type => {
     const pokemonTypeData = await getPokemonTypeModel(type);
-    getPokemonTypeView(ctx, ...pokemonTypeData);
+    getPokemonTypeView(bot, ctx, ...pokemonTypeData);
   });
 };
 

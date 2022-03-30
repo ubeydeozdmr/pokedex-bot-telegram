@@ -1,6 +1,12 @@
 const { emojiTypes } = require('../emoji');
 
-const getPokemonTypeView = (ctx, _typeName, _damageRelations, _pokemonList) => {
+const getPokemonTypeView = (
+  bot,
+  ctx,
+  _typeName,
+  _damageRelations,
+  _pokemonList
+) => {
   let name = _typeName[0].toUpperCase() + _typeName.slice(1);
   let doubleDamageFrom = '';
   let doubleDamageTo = '';
@@ -75,28 +81,47 @@ const getPokemonTypeView = (ctx, _typeName, _damageRelations, _pokemonList) => {
   Object.entries(emojiTypes).forEach(item => {
     if (_typeName === item[0]) emoji = item[1];
   });
-  // console.log(...Object.entries(emojiTypes));
 
-  ctx.replyWithMarkdown(
+  bot.telegram.sendMessage(
+    ctx.update.callback_query.message.chat.id,
+
     `
 ${emoji} *${name}*
 
 *Double damage from:*
-${doubleDamageFrom || '-\n'}
+${doubleDamageFrom || '\\-\n'}
 *Double damage to:*
-${doubleDamageTo || '-\n'}
+${doubleDamageTo || '\\-\n'}
 *Half damage from:*
-${halfDamageFrom || '-\n'}
+${halfDamageFrom || '\\-\n'}
 *Half damage to:*
-${halfDamageTo || '-\n'}
+${halfDamageTo || '\\-\n'}
 *No damage from:*
-${noDamageFrom || '-\n'}
+${noDamageFrom || '\\-\n'}
 *No damage to:*
-${noDamageTo || '-\n'}
-*Pokemon List:*
-${pokemon}
-`
+${noDamageTo || '\\-\n'}
+`,
+    {
+      parse_mode: 'MarkdownV2',
+      reply_markup: {
+        inline_keyboard: [
+          [
+            {
+              text: `Show a list of ${_typeName}-type pokémon`,
+              callback_data: `pt-${_typeName}`,
+            },
+          ],
+        ],
+      },
+    }
   );
+
+  bot.action(`pt-${_typeName}`, ctx => {
+    ctx.deleteMessage();
+    ctx.replyWithMarkdown(`*Pokemon List:*
+${pokemon}
+`);
+  });
 };
 
 module.exports = getPokemonTypeView;

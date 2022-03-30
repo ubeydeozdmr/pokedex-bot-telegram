@@ -3,9 +3,12 @@ const getPokemonListView = (ctx, data, offset) => {
   let list = 'List of pokemons\n\n';
   data.forEach(item => {
     i++;
-    list += i + ': ' + item.name + '\n';
+    list += `${i}: ${
+      item.name[0].toUpperCase() + item.name.slice(1).replaceAll('-', ' ')
+    } \`/pk ${item.name}\`
+`;
   });
-  ctx.reply(list);
+  ctx.replyWithMarkdown(list);
 };
 
 module.exports = getPokemonListView;

@@ -16,7 +16,12 @@ const getPokemonView = (
   let types = '';
   let abilities = '';
   let stats = '';
-  let name = _name[0].toUpperCase() + _name.slice(1);
+  let name = _name.split('-');
+  let tempArr = new Array();
+  Object.values(name).forEach(item => {
+    tempArr.push(item[0].toUpperCase() + item.slice(1));
+  });
+  name = tempArr.join().replaceAll(',', ' ');
 
   _types.forEach(item => {
     types += `${emoji.emojiTypes[item.type.name]} ${
@@ -47,7 +52,7 @@ const getPokemonView = (
     }.png`,
     {
       parse_mode: 'markdown',
-      caption: `*${name}* #${id}
+      caption: `*${name}* #${id} \`(${_name})\`
       
 *Types:*
 ${types}
@@ -77,7 +82,7 @@ ${stats}`,
 
   bot.action(`t-${id}`, ctx => {
     ctx.deleteMessage();
-    pokemonTypeCallback(ctx, _types);
+    pokemonTypeCallback(bot, ctx, _types);
   });
 
   bot.action(`a-${id}`, ctx => {
