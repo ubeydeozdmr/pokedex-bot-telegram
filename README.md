@@ -16,7 +16,7 @@ Note: The old version of the project has been migrated to the legacy branch. [Cl
   - package.json now uses `/src/index.js` as the main file instead of `/index.js`.
 - Added emojis for weight and length.
 
-[See full changelog](https://github.com/ubeydeozdmr/pokedex-bot-telegram/blob/main/changelog.md)
+[See full changelog](./changelog.md)
 
 ## What is it & what does it do?
 
