@@ -27,7 +27,7 @@ const getPokemonView = (
     types += `${emoji.emojiTypes[item.type.name]} ${
       item.type.name[0].toUpperCase() +
       item.type.name.slice(1).replaceAll('-', ' ')
-    }
+    } \`/pktype ${item.type.name}\`
 `;
   });
   _abilities.forEach(item => {

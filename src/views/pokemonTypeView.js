@@ -73,7 +73,10 @@ const getPokemonTypeView = (
 
   _pokemonList.forEach(
     item =>
-      (pokemon += `${item.pokemon.name}
+      (pokemon += `${
+        item.pokemon.name[0].toUpperCase() +
+        item.pokemon.name.slice(1).replaceAll('-', ' ')
+      } \`/pk ${item.pokemon.name}\`
 `)
   );
 
@@ -83,7 +86,7 @@ const getPokemonTypeView = (
   });
 
   bot.telegram.sendMessage(
-    ctx.update.callback_query.message.chat.id,
+    ctx.update.callback_query?.message.chat.id || ctx.update.message.chat.id,
 
     `
 ${emoji} *${name}*

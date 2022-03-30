@@ -16,4 +16,7 @@ pokemonCommand(bot);
 const pokemonListCommand = require('./controllers/commands/pokemonListCommand');
 pokemonListCommand(bot);
 
+const pokemonTypeCommand = require('./controllers/commands/pokemonTypeCommand');
+pokemonTypeCommand(bot);
+
 bot.launch();
