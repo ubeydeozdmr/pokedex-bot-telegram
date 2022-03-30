@@ -1,7 +1,7 @@
-const config = require('../../config');
+const { MESSAGE_START } = require('../../config');
 
 module.exports = bot => {
   bot.start(ctx => {
-    ctx.reply(config.MESSAGE_START);
+    ctx.reply(MESSAGE_START);
   });
 };

@@ -1,7 +1,7 @@
-const config = require('../../config');
+const { MESSAGE_HELP } = require('../../config');
 
 module.exports = bot => {
   bot.help(ctx => {
-    ctx.replyWithMarkdown(config.MESSAGE_HELP);
+    ctx.replyWithMarkdown(MESSAGE_HELP);
   });
 };
