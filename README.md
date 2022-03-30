@@ -5,9 +5,16 @@ Note: The old version of the project has been migrated to the legacy branch. [Cl
 ## What's new in version 1.1
 
 - Some folder & file names changed.
+  - An attempt was made to format the project structure as MVC.
+  - For instance: `/src/models/pokemonListModel.js` instead of `/src/handlers/getPokemonListData.js`
 - Inline buttons has been added.
-- Types callback has been added.
+  - Types and Abilities buttons has been added.
+- User experience has been improved.
+  -  You can now put spaces between words instead of short lines when typing Pokémon with names of 2 or more words.
+  -  When you want to see a pokemon in the list after using the `/pklist <digit>` command, instead of entering the `/pk <pokémons name / ID>` command, you will be able to copy the code snippet to the right of each pokemon.
 - New folder location is specified.
+  - package.json now uses `/src/index.js` as the main file instead of `/index.js`.
+- Added emojis for weight and length.
 
 [See full changelog](https://github.com/ubeydeozdmr/pokedex-bot-telegram/blob/main/changelog.md)
 
