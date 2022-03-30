@@ -1,5 +1,4 @@
-// prettier-ignore
-const { REJECT_LIST ,REJECT_INVALID_LIST_INPUT, NOT_FOUND_LIST } = require('../../config');
+const { REJECT_INVALID_LIST_INPUT, NOT_FOUND_LIST } = require('../../config');
 const getPokemonListModel = require('../../models/pokemonListModel');
 const getPokemonListView = require('../../views/pokemonListView');
 
@@ -11,8 +10,8 @@ module.exports = bot => {
     if (isNaN(input[0]))
       return ctx.replyWithMarkdown(REJECT_INVALID_LIST_INPUT);
     if (input[0] < 1 || input[0] > 9) return ctx.reply(NOT_FOUND_LIST);
-    // prettier-ignore
-    const pokemonListData = await getPokemonListModel((input[0] - 1) * 100, 100);
-    getPokemonListView(bot, ctx, pokemonListData, (input[0] - 1) * 100);
+    let offset = (input[0] - 1) * 100;
+    const pokemonListData = await getPokemonListModel(offset, 100);
+    getPokemonListView(bot, ctx, pokemonListData, offset);
   });
 };

@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-const getPokemonListModel = async (offset, limit) => {
+const getPokemonListModel = async (offset, limit = 100) => {
   if (offset === 800) limit -= 2;
   try {
     let res = await fetch(
