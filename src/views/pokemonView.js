@@ -1,4 +1,5 @@
 const pokemonAbilityCallback = require('../controllers/callbacks/pokemonAbilityCallback');
+const pokemonTypeCallbackV2 = require('../controllers/callbacks/pokemonTypeCallback');
 const pokemonTypeCallback = require('../controllers/callbacks/pokemonTypeCallback');
 const emoji = require('../emoji');
 
@@ -81,12 +82,15 @@ ${stats}`,
   );
 
   bot.action(`t-${id}`, ctx => {
-    ctx.deleteMessage();
+    // ctx.deleteMessage();
     pokemonTypeCallback(bot, ctx, _types);
+    // console.log(ctx.update.callback_query.message.chat.id);
+    // prettier-ignore
+    // pokemonTypeCallbackV2(bot, ctx.update.callback_query.message.chat.id, _types);
   });
 
   bot.action(`a-${id}`, ctx => {
-    ctx.deleteMessage();
+    // ctx.deleteMessage();
     pokemonAbilityCallback(ctx, _abilities);
   });
 };
