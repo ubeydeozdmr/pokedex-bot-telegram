@@ -71,14 +71,14 @@ const getPokemonTypeView = (
 `;
   });
 
-  _pokemonList.forEach(
-    item =>
-      (pokemon += `${
+  _pokemonList.forEach(item => {
+    if (item.pokemon.url.slice(-6, -4) != 10)
+      pokemon += `${parseInt(item.pokemon.url.slice(34, 37))}: ${
         item.pokemon.name[0].toUpperCase() +
         item.pokemon.name.slice(1).replaceAll('-', ' ')
       } \`/pk ${item.pokemon.name}\`
-`)
-  );
+`;
+  });
 
   let emoji = '';
   Object.entries(emojiTypes).forEach(item => {

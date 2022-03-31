@@ -1,5 +1,4 @@
 const getPokemonListView = (_, ctx, data, offset) => {
-  let curPage = offset / 100 + 1;
   let i = offset;
   let list = 'List of pokemons\n\n';
 
@@ -11,14 +10,9 @@ const getPokemonListView = (_, ctx, data, offset) => {
 `;
   });
 
-  list += `
-Current page: \`/pklist ${curPage}\`
-Prev: \`/pklist ${curPage - 1}\`
-Next: \`/pklist ${curPage + 1}\`
-`;
-
   ctx.replyWithMarkdown(list);
 
+  // let curPage = offset / 100 + 1;
   // let paginationBtnsArr = new Array();
   // switch (curPage) {
   //   case 1:

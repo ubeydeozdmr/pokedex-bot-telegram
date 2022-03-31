@@ -5,7 +5,7 @@ const pokemonAbilityListView = (ctx, _data) => {
       (text += `${
         item.name[0].toUpperCase() + item.name.slice(1)
       } \`/pkability ${item.name}\`
-  `)
+`)
   );
   ctx.replyWithMarkdown(text);
 };

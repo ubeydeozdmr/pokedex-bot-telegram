@@ -4,6 +4,8 @@ const MESSAGE_HELP = `You can search Pokédex Bot by both ID and name. To do thi
 /pk \`<id/name>\` - Photo and stats of the pokémon you entered.
 /pk \`random\` - Photo and stats of random pokémon.
 /pklist \`<page number>\` - Shows the list of all pokémon from the page you entered.
+/pkability - Shows the list of all abilitys.
+/pkability \`<ability name>\` - It gives information about the ability you entered and shows the list of pokémon with that ability.
 /pktype - Shows the list of all types.
 /pktype \`<type name>\` - It gives information about the type you entered and shows the list of pokémon with that type.
 
@@ -14,6 +16,7 @@ const MESSAGE_HELP = `You can search Pokédex Bot by both ID and name. To do thi
 \`/pk 139\` - Omastar's photo and stats
 \`/pklist 2\` - Shows pokémon from the second generation.
 \`/pklist 8\` - Shows pokémon from the eighth generation.
+\`/pkability synchronize\` - Shows the list of all pokémon that have the synchronize feature.
 \`/pktype fire\` - Shows the list of all fire type pokémon.`;
 
 const REJECT_INVALID_INPUT = `Please enter an ID or a pokemon name after /pk command. Use /help command to get help.`;
@@ -40,12 +43,3 @@ module.exports = {
   NOT_FOUND_LIST,
   REJECT_LIST,
 };
-
-/*
-/pkeffect - Shows the list of all effects.
-/pkeffect \`<effect name>\` - It gives information about the effect you entered and shows the list of pokémon with that effect.
-/pktype - Shows the list of all types.
-/pktype \`<type name>\` - It gives information about the type you entered and shows the list of pokémon with that type.
-/pkeffect synchronize - Shows the list of all pokémon that have the synchronize feature.
-/pktype fire - Shows the list of all fire type pokémon.
-*/

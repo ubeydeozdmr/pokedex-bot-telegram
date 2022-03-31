@@ -34,7 +34,7 @@ const getPokemonView = (
     abilities += `${
       item.ability.name[0].toUpperCase() +
       item.ability.name.slice(1).replaceAll('-', ' ')
-    }
+    } \`/pkability ${item.ability.name}\`
 `;
   });
   _stats.forEach(item => {
