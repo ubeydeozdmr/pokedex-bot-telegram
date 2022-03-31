@@ -12,6 +12,14 @@ const getPokemonListView = (_, ctx, data, offset) => {
 
   ctx.replyWithMarkdown(list);
 
+  /*
+  Here I tried to prepare a pagination for the pokémon list view (/pklist), but
+  without much success 😅. If you have a suggestion on this subject, you can
+  create a pull request or contact me with e-mail: ubeydeozdmr@gmail.com
+
+  Or better yet, you can add this feature and publish this bot on your behalf. 🙂
+  */
+
   // let curPage = offset / 100 + 1;
   // let paginationBtnsArr = new Array();
   // switch (curPage) {

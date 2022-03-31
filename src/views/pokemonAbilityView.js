@@ -12,7 +12,6 @@ const getPokemonAbilityView = (ctx, _abilityName, _entries) => {
         item.version_group.name.slice(1).replaceAll('-', ' ')
       }:* ${item.flavor_text}
 `;
-    // console.log(item.flavor_text, item.version_group.name);
   });
 
   ctx.replyWithMarkdown(text);

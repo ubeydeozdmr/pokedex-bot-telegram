@@ -7,13 +7,21 @@ const pokemonTypeCallback = async (bot, ctx, _types) => {
   Object.values(types).forEach(val => {
     typesArr.push(val.type.name);
   });
-  console.log(typesArr);
-  console.log(ctx.update);
   typesArr.forEach(async type => {
     const pokemonTypeData = await getPokemonTypeModel(type);
     getPokemonTypeView(bot, ctx, ...pokemonTypeData);
   });
 };
+
+/*
+In fact, when you get a pokemon with the /pk command and press the Types button
+at the bottom, it shows all the types of that bot, no matter how many (a similar
+situation is valid for the Abilities button). As a result, a very long message
+thread is formed and I think this is not a good situation for user experience.
+That's why I tried to let the user decide which type they want to choose when
+the Types button is pressed. But this feature is not working properly at the
+moment and it is hard-coded, so I didn't add this feature in v1.1 version.
+*/
 
 // const pokemonTypeCallbackV2 = async (bot, destination, _types) => {
 //   let pokemon = '';

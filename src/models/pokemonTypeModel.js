@@ -9,7 +9,7 @@ const getPokemonTypeModel = async type => {
     let data = await res.json();
     return [data.name, data.damage_relations, data.pokemon];
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
   }
 };
 

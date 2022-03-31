@@ -1,7 +1,14 @@
 const pokemonAbilityCallback = require('../controllers/callbacks/pokemonAbilityCallback');
-const pokemonTypeCallbackV2 = require('../controllers/callbacks/pokemonTypeCallback');
+// const pokemonTypeCallbackV2 = require('../controllers/callbacks/pokemonTypeCallback');
 const pokemonTypeCallback = require('../controllers/callbacks/pokemonTypeCallback');
 const emoji = require('../emoji');
+
+/*
+When Controller (pokemonCommand.js) connects with View (pokemonView.js), it
+transfers data from Model (pokemonModel.js) to View. As a result, View (this
+file) can send data such as pokémon's picture, name, ID, stats, abilities,
+types, weight/length as a message to users in Telegram.
+*/
 
 const getPokemonView = (
   bot,

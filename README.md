@@ -15,6 +15,8 @@ Note: The old version of the project has been migrated to the legacy branch. [Cl
 - New folder location is specified.
   - package.json now uses `/src/index.js` as the main file instead of `/index.js`.
 - Added emojis for weight and length.
+- Some bugs fixed
+  - some word/numbers causing the crash, ID not showing, possible vulnerabilities etc.
 
 [See full changelog](./changelog.md)
 
