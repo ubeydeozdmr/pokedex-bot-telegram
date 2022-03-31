@@ -5,7 +5,6 @@ const getPokemonAbilityView = (ctx, _abilityName, _entries) => {
   text += `*${abilityName.replaceAll('-', ' ')}*
 
 `;
-  // console.log(_entries);
   Object.values(_entries).forEach(item => {
     if (item.language.name === 'en')
       text += `*${

@@ -18,6 +18,7 @@ const MESSAGE_HELP = `You can search Pokédex Bot by both ID and name. To do thi
 
 const REJECT_INVALID_INPUT = `Please enter an ID or a pokemon name after /pk command. Use /help command to get help.`;
 const REJECT_INVALID_LIST_INPUT = `Please enter an *number* after \`/pklist\` command`;
+const REJECT_INVALID_ABILITY_INPUT = `Numbers are not allowed.`;
 const NOT_FOUND_PKID = `There is no such pokemon ID. Try entering a number between 1-898`;
 const NOT_FOUND_PKNAME = `There is no such pokemon name. Try using the /pklist command`;
 const NOT_FOUND_LIST = 'The page number which you entered must be between 1-9';
@@ -33,6 +34,7 @@ module.exports = {
   MESSAGE_HELP,
   REJECT_INVALID_INPUT,
   REJECT_INVALID_LIST_INPUT,
+  REJECT_INVALID_ABILITY_INPUT,
   NOT_FOUND_PKID,
   NOT_FOUND_PKNAME,
   NOT_FOUND_LIST,

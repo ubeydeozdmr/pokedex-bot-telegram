@@ -1,5 +1,4 @@
-const getPokemonListView = (bot, ctx, data, offset) => {
-  let paginationBtnsArr = new Array();
+const getPokemonListView = (_, ctx, data, offset) => {
   let curPage = offset / 100 + 1;
   let i = offset;
   let list = 'List of pokemons\n\n';
@@ -12,76 +11,84 @@ const getPokemonListView = (bot, ctx, data, offset) => {
 `;
   });
 
-  switch (curPage) {
-    case 1:
-      paginationBtnsArr.push({
-        text: `Page ${curPage + 1} >`,
-        callback_data: `page-${curPage + 1}`,
-      });
-      break;
-    case 9:
-      paginationBtnsArr.push({
-        text: `< Page ${curPage - 1}`,
-        callback_data: `page-${curPage - 1}`,
-      });
-      break;
-    default:
-      paginationBtnsArr.push({
-        text: `< Page ${curPage - 1}`,
-        callback_data: `page-${curPage - 1}`,
-      });
-      paginationBtnsArr.push({
-        text: `● ${curPage} ●`,
-        callback_data: `page-${curPage}`,
-      });
-      paginationBtnsArr.push({
-        text: `Page ${curPage + 1} >`,
-        callback_data: `page-${curPage + 1}`,
-      });
-  }
+  list += `
+Current page: \`/pklist ${curPage}\`
+Prev: \`/pklist ${curPage - 1}\`
+Next: \`/pklist ${curPage + 1}\`
+`;
 
-  bot.telegram.sendMessage(
-    ctx.update.callback_query?.message.chat.id || ctx.update.message.chat.id,
-    list,
-    {
-      parse_mode: 'MarkdownV2',
-      reply_markup: {
-        inline_keyboard: [
-          paginationBtnsArr,
-          // [
-          //   {
-          //     text: `< Page ${curPage - 1}`,
-          //     callback_data: `page-${curPage - 1}`,
-          //   },
-          //   {
-          //     text: `● ${curPage} ●`,
-          //     callback_data: `page-${curPage}`,
-          //   },
-          //   {
-          //     text: `Page ${curPage + 1} >`,
-          //     callback_data: `page-${curPage + 1}`,
-          //   },
-          // ],
-        ],
-      },
-    }
-  );
+  ctx.replyWithMarkdown(list);
 
-  bot.action(`page-${curPage - 1}`, ctx => {
-    ctx.deleteMessage();
-    ctx.replyWithMarkdown(`\`/pklist ${curPage - 1}\``);
-  });
+  // let paginationBtnsArr = new Array();
+  // switch (curPage) {
+  //   case 1:
+  //     paginationBtnsArr.push({
+  //       text: `Page ${curPage + 1} >`,
+  //       callback_data: `page-${curPage + 1}`,
+  //     });
+  //     break;
+  //   case 9:
+  //     paginationBtnsArr.push({
+  //       text: `< Page ${curPage - 1}`,
+  //       callback_data: `page-${curPage - 1}`,
+  //     });
+  //     break;
+  //   default:
+  //     paginationBtnsArr.push({
+  //       text: `< Page ${curPage - 1}`,
+  //       callback_data: `page-${curPage - 1}`,
+  //     });
+  //     paginationBtnsArr.push({
+  //       text: `● ${curPage} ●`,
+  //       callback_data: `page-${curPage}`,
+  //     });
+  //     paginationBtnsArr.push({
+  //       text: `Page ${curPage + 1} >`,
+  //       callback_data: `page-${curPage + 1}`,
+  //     });
+  // }
 
-  bot.action(`page-${curPage}`, ctx => {
-    ctx.deleteMessage();
-    ctx.replyWithMarkdown(`\`/pklist ${curPage}\``);
-  });
+  // bot.telegram.sendMessage(
+  //   ctx.update.callback_query?.message.chat.id || ctx.update.message.chat.id,
+  //   list,
+  //   {
+  //     parse_mode: 'MarkdownV2',
+  //     reply_markup: {
+  //       inline_keyboard: [
+  //         paginationBtnsArr,
+  // [
+  //   {
+  //     text: `< Page ${curPage - 1}`,
+  //     callback_data: `page-${curPage - 1}`,
+  //   },
+  //   {
+  //     text: `● ${curPage} ●`,
+  //     callback_data: `page-${curPage}`,
+  //   },
+  //   {
+  //     text: `Page ${curPage + 1} >`,
+  //     callback_data: `page-${curPage + 1}`,
+  //   },
+  // ],
+  // ],
+  // },
+  // }
+  // );
 
-  bot.action(`page-${curPage + 1}`, ctx => {
-    ctx.deleteMessage();
-    ctx.replyWithMarkdown(`\`/pklist ${curPage + 1}\``);
-  });
-  // ctx.replyWithMarkdown(list);
+  // bot.action(`page-${curPage - 1}`, ctx => {
+  //   ctx.deleteMessage();
+  //   ctx.replyWithMarkdown(`\`/pklist ${curPage - 1}\``);
+  // });
+
+  // bot.action(`page-${curPage}`, ctx => {
+  //   ctx.deleteMessage();
+  //   ctx.replyWithMarkdown(`\`/pklist ${curPage}\``);
+  // });
+
+  // bot.action(`page-${curPage + 1}`, ctx => {
+  //   ctx.deleteMessage();
+  //   ctx.replyWithMarkdown(`\`/pklist ${curPage + 1}\``);
+  // });
 };
 
 module.exports = getPokemonListView;
