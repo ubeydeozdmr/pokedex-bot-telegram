@@ -11,8 +11,8 @@ module.exports = bot => {
       return getPokemonAbilityListView(ctx, pokemonAbilityListModel);
     }
     input.shift();
-    const pokemonAbilityModel = await getPokemonAbilityModel(ctx, input[0]);
-    if (pokemonAbilityModel)
-      getPokemonAbilityView(ctx, input[0], pokemonAbilityModel);
+    const pokemonAbilityData = await getPokemonAbilityModel(ctx, input[0]);
+    if (pokemonAbilityData)
+      getPokemonAbilityView(ctx, input[0], pokemonAbilityData);
   });
 };
