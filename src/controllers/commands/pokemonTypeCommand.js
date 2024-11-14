@@ -5,6 +5,12 @@ const getPokemonTypeView = require('../../views/pokemonTypeView');
 
 module.exports = bot => {
   bot.command('pktype', async ctx => {
+    console.log(
+      'pokemonTypeCommand triggered by:',
+      ctx.from.username,
+      ctx.from.id,
+      ctx.message.text
+    );
     let input = ctx.message.text.toLowerCase().split(' ');
     if (input.length === 1) {
       const pokemonTypeListData = await getPokemonTypeListModel();

@@ -5,6 +5,12 @@ const getPokemonAbilityView = require('../../views/pokemonAbilityView');
 
 module.exports = bot => {
   bot.command('pkability', async ctx => {
+    console.log(
+      'pokemonAbilityCommand triggered by:',
+      ctx.from.username,
+      ctx.from.id,
+      ctx.message.text
+    );
     let input = ctx.message.text.toLowerCase().split(' ');
     if (input.length === 1) {
       const pokemonAbilityListModel = await getPokemonAbilityListModel(0);

@@ -4,6 +4,12 @@ const getPokemonListView = require('../../views/pokemonListView');
 
 module.exports = bot => {
   bot.command('pklist', async ctx => {
+    console.log(
+      'pokemonListCommand triggered by:',
+      ctx.from.username,
+      ctx.from.id,
+      ctx.message.text
+    );
     let input = ctx.message.text.toLowerCase().split(' ');
     if (input.length === 1) input.push('1');
     input.shift();

@@ -12,6 +12,12 @@ PokeAPI via pokemonModel.js and sends it to pokemonView.js.
 
 module.exports = bot => {
   bot.command('pk', async ctx => {
+    console.log(
+      'pokemonCommand triggered by:',
+      ctx.from.username,
+      ctx.from.id,
+      ctx.message.text
+    );
     let input = ctx.message.text.toLowerCase().split(' ');
     if (input.length === 1) return ctx.reply(REJECT_INVALID_INPUT);
     input.shift();
