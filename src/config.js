@@ -1,5 +1,10 @@
-const MESSAGE_START = `Hello, I'm Pokédex Bot. I can show you the list of all pokémon and give you the picture and description of that pokémon in return for you to enter the ID or name of the pokémon you requested. Try entering the /help command to get help.`;
-const MESSAGE_HELP = `You can search Pokédex Bot by both ID and name. To do this, type /pk and leave a space, then enter the ID or name of the pokémon and send the command. The ID can be a minimum of 1 and a maximum of 898.
+const MESSAGE_START = `*NOTE:* The activities of this bot will be stopped by the beginning of 2025 at the latest: Here's why: http://bit.ly/3Otziyu
+
+Hello, I'm Pokédex Bot. I can show you the list of all pokémon and give you the picture and description of that pokémon in return for you to enter the ID or name of the pokémon you requested. Try entering the /help command to get help.`;
+
+const MESSAGE_HELP = `*NOTE:*: The activities of this bot will be stopped by the beginning of 2025 at the latest: Here's why: http://bit.ly/3Otziyu
+
+You can search Pokédex Bot by both ID and name. To do this, type /pk and leave a space, then enter the ID or name of the pokémon and send the command. The ID can be a minimum of 1 and a maximum of 898.
 *Usage:*
 /pk \`<id/name>\` - Photo and stats of the pokémon you entered.
 /pk \`random\` - Photo and stats of random pokémon.
